@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { RedisModule } from './redis/redis.module';
@@ -19,5 +20,6 @@ import { SocketModule } from './socket/socket.module';
     LicenseModule,
     SocketModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
