@@ -1,0 +1,59 @@
+# Node.js
+node_modules/
+
+# Build outputs
+dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# Environment
+.env
+.env.*
+
+# Test coverage
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+*.swp
+*.swo
+
+# Ignore local files
+local.env
+
+# Ignore compiled map files
+*.map
+
+# Ignore Jest output
+jest-e2e.json
+
+# Ignore package lock files
+package-lock.json
+yarn.lock
+
+# Ignore other temp files
+*.tmp
+*.temp
+
+# Ignore output from Nest CLI
+dist/
+
+# Ignore build cache
+.cache/
+
+# Ignore test/
+test/
