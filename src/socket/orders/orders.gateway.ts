@@ -34,7 +34,10 @@ export class OrdersGateway implements OnModuleInit {
     await this.redis.subscribe('socket:emit', (message) => {
       try {
         const payload: EmitPayload = JSON.parse(message);
-        this.logger.log(`Redis bridge → ${payload.event} to ${payload.room}`);
+        const sockets = await this.server.in(payload.room).fetchSockets();
+        this.logger.log(
+          `Redis bridge → event="${payload.event}" room="${payload.room}" clients=${sockets.length} data=${JSON.stringify(payload.data)}`,
+        );
         this.server.to(payload.room).emit(payload.event, payload.data);
       } catch (err) {
         this.logger.error('Failed to parse socket:emit message', err);
