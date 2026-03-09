@@ -31,7 +31,7 @@ export class OrdersGateway implements OnModuleInit {
   constructor(private readonly redis: RedisService) {}
 
   async onModuleInit() {
-    await this.redis.subscribe('socket:emit', (message) => {
+    await this.redis.subscribe('socket:emit', async (message) => {
       try {
         const payload: EmitPayload = JSON.parse(message);
         const sockets = await this.server.in(payload.room).fetchSockets();
