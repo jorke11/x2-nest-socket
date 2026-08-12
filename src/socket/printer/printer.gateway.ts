@@ -8,6 +8,10 @@ import {
 import { Logger } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 
+// TODO(seguridad): este gateway no valida el JWT del cliente (a diferencia de
+// CoreGateway). Cualquier socket conectado puede unirse al room de impresión de
+// cualquier negocio y disparar print-order/open-cash-drawer sin autenticarse.
+// Ver TODO.md en la raiz del repo.
 @WebSocketGateway({ cors: { origin: '*' } })
 export class PrinterGateway {
   @WebSocketServer() server: Server;

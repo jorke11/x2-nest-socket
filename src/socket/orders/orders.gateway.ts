@@ -22,6 +22,11 @@ interface EmitPayload {
  *   { event, room, data }
  * This gateway forwards it to connected clients.
  */
+// TODO(seguridad): los handlers de este gateway no validan el JWT ni verifican que
+// el business_id recibido corresponda al cliente que emite el evento. Cualquier
+// socket conectado puede inyectar eventos falsos (created_order, payment_order,
+// worker-updated, etc.) hacia el room de cualquier negocio. Ver TODO.md en la raiz
+// del repo.
 @Injectable()
 @WebSocketGateway({ cors: { origin: '*' } })
 export class OrdersGateway implements OnModuleInit {
