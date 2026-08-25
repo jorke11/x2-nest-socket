@@ -87,8 +87,13 @@ export class CoreGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('joinRoom')
-  handleJoinRoom(@ConnectedSocket() client: Socket, @MessageBody() clientId: string) {
-    const roomName = `vds_${clientId}`;
+  handleJoinRoom(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: string | { business_id: number | string; branch_id?: number | string },
+  ) {
+    // Compat: clientes viejos aún pueden emitir un string plano (solo business_id).
+    const roomName =
+      typeof data === 'string' ? `vds_${data}` : `vds_${data.business_id}_${data.branch_id}`;
     client.join(roomName);
     this.logger.log(`${client.id} joined ${roomName}`);
   }
